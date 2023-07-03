@@ -1,6 +1,5 @@
 import random
-import solver
-import brute_force_solver
+from solvers import solver, brute_force_solver, simple_backtracking, min_rem_val
 import pygame
 import time
 
@@ -131,8 +130,12 @@ class Grid:
                 ans = brute_force_solver.solve_grid(self.width, self.height, x_nums, y_nums)
             elif solver_opt == "baseline":
                 ans = solver.solve_grid(self.width, self.height, x_nums, y_nums)
+            elif solver_opt == "backtracking":
+                ans = simple_backtracking.solve_grid(self.width, self.height, x_nums, y_nums)
+            elif solver_opt == "minimum remaining value":
+                ans = min_rem_val.solve_grid(self.width, self.height, x_nums, y_nums)
             running_time = time.time() - start_time
-            print("The total running time of {} solver is {}".format(solver_opt, running_time))
+            print("The total running time of {} solvers is {}".format(solver_opt, running_time))
 
             solution, only = ans[0], ans[1]
             # Iterate through each number in the solution.

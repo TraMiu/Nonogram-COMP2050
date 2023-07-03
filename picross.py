@@ -534,6 +534,8 @@ puzzlemenu.add_command(label="Check Solution", command=check_solution, accelerat
 puzzlemenu.add_command(label="Save Progress", command=save_progress, accelerator="F5")
 puzzlemenu.add_command(label="Puzzle Baseline Solver", command=lambda: solve_puzzle("baseline"), accelerator="F12")
 puzzlemenu.add_command(label="Puzzle Brute Force Solver", command=lambda: solve_puzzle("brute force"))
+puzzlemenu.add_command(label="Puzzle Backtracking Solver", command=lambda: solve_puzzle("backtracking"))
+puzzlemenu.add_command(label="Puzzle MRV Solver", command=lambda: solve_puzzle("minimum remaining value"))
 menubar.add_cascade(label="Puzzle", menu=puzzlemenu)
 
 # Create setting menu.
