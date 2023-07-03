@@ -120,8 +120,8 @@ class MyDialog:
         height = tk.IntVar(top)
 
         # Create list of possible values. (Multiples of 5 from 5->50)
-        widths = [i*5 for i in range(1,11)]
-        heights = [i*5 for i in range(1,11)]
+        widths = [i for i in range(2,51)]
+        heights = [i for i in range(2,51)]
         # Try to set the default values to the dimensions of the current grid
         try:
             width.set(grid.width)
@@ -437,11 +437,11 @@ def save_progress():
 """
 solve puzzle is really interesting, may need to investigate more in the solve()
 """
-def solve_puzzle():
+def solve_puzzle(solver):
     # If there is a grid...
     if grid != None:
         # Solve the puzzle.
-        grid.solve()
+        grid.solve(solver)
 
 """
 May investigate further in old state, new state of undo_stack.pop()
@@ -528,11 +528,12 @@ menubar.add_cascade(label="Create", menu=createmenu)
 
 # Create puzzle menu.
 puzzlemenu = tk.Menu(menubar, tearoff=0)
-puzzlemenu.add_command(label="Undo Move", command=undo_move, accelerator="Z")
-puzzlemenu.add_command(label="Redo Move", command=redo_move, accelerator="R")
+# puzzlemenu.add_command(label="Undo Move", command=undo_move, accelerator="Z")
+# puzzlemenu.add_command(label="Redo Move", command=redo_move, accelerator="R")
 puzzlemenu.add_command(label="Check Solution", command=check_solution, accelerator="Enter")
 puzzlemenu.add_command(label="Save Progress", command=save_progress, accelerator="F5")
-puzzlemenu.add_command(label="Solve Puzzle", command=solve_puzzle, accelerator="F12")
+puzzlemenu.add_command(label="Puzzle Baseline Solver", command=lambda: solve_puzzle("baseline"), accelerator="F12")
+puzzlemenu.add_command(label="Puzzle Brute Force Solver", command=lambda: solve_puzzle("brute force"))
 menubar.add_cascade(label="Puzzle", menu=puzzlemenu)
 
 # Create setting menu.

@@ -1,6 +1,8 @@
 import random
 import solver
+import brute_force_solver
 import pygame
+import time
 
 class Grid:
     def __init__(self, width, height, x_nums, y_nums):
@@ -117,13 +119,21 @@ class Grid:
         return x_nums, y_nums
 
     # Solves the grid.
-    def solve(self):
+    def solve(self, solver_opt = ""):
         # Convert the clues to integers for processing.
         x_nums, y_nums = self.get_nums_from_clues()
         # Try to solve the puzzle
         try:
+
             # Use solving algorithm to create a grid of 1s and 2s.
-            ans = solver.solve_grid(self.width, self.height, x_nums, y_nums)
+            start_time = time.time()
+            if solver_opt == "brute force":
+                ans = brute_force_solver.solve_grid(self.width, self.height, x_nums, y_nums)
+            elif solver_opt == "baseline":
+                ans = solver.solve_grid(self.width, self.height, x_nums, y_nums)
+            running_time = time.time() - start_time
+            print("The total running time of {} solver is {}".format(solver_opt, running_time))
+
             solution, only = ans[0], ans[1]
             # Iterate through each number in the solution.
             for y, row in enumerate(solution):

@@ -53,8 +53,8 @@ def solve(row_values, col_values, grid, unique=True):
     # Repeat until nothing more can be deduced.
     while changed:
         changed = False
-        # Update each row using the solve_row() procedure.
         for y, row_value in enumerate(row_values):
+            # changing the row value compared to the current grid
             row = solve_row(row_value, grid[y])
             if grid[y] != row:
                 changed = True
@@ -95,5 +95,4 @@ def solve(row_values, col_values, grid, unique=True):
 def solve_grid(width, height, x_nums, y_nums):
     grid = [[0]*width for i in range(height)]
     ans = solve(y_nums, x_nums, grid)
-    print("The answer to this is: {}".format(ans))
     return ans
